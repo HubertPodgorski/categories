@@ -3,6 +3,8 @@ import styles from './Categories.module.scss'
 import CategoryList from '../../components/CategoryList/CategoryList'
 import { categoriesMock } from '../../consts/mocks'
 import CategoriesService, { Category } from '../../services/CategoriesService'
+import CategoryInfo from '../../components/CategoryInfo/CategoryInfo'
+import { globalSettings } from '../../consts/settings'
 
 const staticTexts = {
     goBack: 'Go back',
@@ -11,6 +13,7 @@ const staticTexts = {
 interface State {
     currentCategoryId: string;
     categoryList: Category[];
+    isLast: boolean;
 }
 
 interface Props {}
@@ -20,22 +23,34 @@ class Categories extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            currentCategoryId: '',
+            currentCategoryId: globalSettings.mainCategoryId,
             categoryList: CategoriesService.getCategoryListByParentId(
-                '',
+                globalSettings.mainCategoryId,
+                categoriesMock
+            ),
+            isLast: CategoriesService.isCategoryLastById(
+                globalSettings.mainCategoryId,
                 categoriesMock
             ),
         }
     }
 
-    onCategoryPick = (categoryId: string): void => {
+    updateStateByCategoryId(givenCategoryId: string): void {
         this.setState({
-            currentCategoryId: categoryId,
+            currentCategoryId: givenCategoryId,
             categoryList: CategoriesService.getCategoryListByParentId(
-                categoryId,
+                givenCategoryId,
+                categoriesMock
+            ),
+            isLast: CategoriesService.isCategoryLastById(
+                givenCategoryId,
                 categoriesMock
             ),
         })
+    }
+
+    onCategoryPick = (categoryId: string): void => {
+        this.updateStateByCategoryId(categoryId)
     }
 
     onGoBackClick = (): void => {
@@ -44,13 +59,24 @@ class Categories extends React.Component<Props, State> {
             categoriesMock
         )
 
-        this.setState({
-            currentCategoryId: parentId,
-            categoryList: CategoriesService.getCategoryListByParentId(
-                parentId,
-                categoriesMock
-            ),
-        })
+        this.updateStateByCategoryId(parentId)
+    }
+
+    getCategoryBydCurrentCategoryId(): Category {
+        const defaultTextValue = '---'
+
+        const category = CategoriesService.getCategoryById(
+            this.state.currentCategoryId,
+            categoriesMock
+        )
+
+        return category
+            ? category
+            : {
+                  name: defaultTextValue,
+                  id: defaultTextValue,
+                  parentId: defaultTextValue,
+              }
     }
 
     render() {
@@ -60,10 +86,18 @@ class Categories extends React.Component<Props, State> {
                     {staticTexts.goBack}
                 </button>
 
-                <CategoryList
-                    categoryList={this.state.categoryList}
-                    onCategoryPick={this.onCategoryPick}
-                />
+                {!this.state.isLast && (
+                    <CategoryList
+                        categoryList={this.state.categoryList}
+                        onCategoryPick={this.onCategoryPick}
+                    />
+                )}
+
+                {this.state.isLast && (
+                    <CategoryInfo
+                        category={this.getCategoryBydCurrentCategoryId()}
+                    />
+                )}
             </section>
         )
     }
