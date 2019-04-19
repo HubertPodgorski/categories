@@ -71,4 +71,14 @@ export const categoriesMock: Category[] = [
         parentId: '6',
         name: 'Sub category name 7',
     },
+    {
+        id: '15',
+        parentId: '8',
+        name: 'Very sub category name',
+    },
+    {
+        id: '16',
+        parentId: '8',
+        name: 'Very sub category name 2',
+    },
 ]
