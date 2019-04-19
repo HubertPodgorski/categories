@@ -5,6 +5,10 @@ import { categoriesMock } from '../../consts/mocks'
 import CategoriesService, { Category } from '../../services/CategoriesService'
 import CategoryInfo from '../../components/CategoryInfo/CategoryInfo'
 import { globalSettings } from '../../consts/settings'
+import Breadcrumbs from '../../components/Breadcrumbs/Breadcrumbs'
+import BreadcrumbsService, {
+    Breadcrumb,
+} from '../../services/BreadcrumbsService'
 
 const staticTexts = {
     goBack: 'Go back',
@@ -14,6 +18,8 @@ interface State {
     currentCategoryId: string;
     categoryList: Category[];
     isLast: boolean;
+    breadcrumbs: Breadcrumb[];
+    isAtMainCategories: boolean;
 }
 
 interface Props {}
@@ -32,10 +38,12 @@ class Categories extends React.Component<Props, State> {
                 globalSettings.mainCategoryId,
                 categoriesMock
             ),
+            breadcrumbs: [],
+            isAtMainCategories: true,
         }
     }
 
-    updateStateByCategoryId(givenCategoryId: string): void {
+    updateState(givenCategoryId: string, breadcrumbs: Breadcrumb[]): void {
         this.setState({
             currentCategoryId: givenCategoryId,
             categoryList: CategoriesService.getCategoryListByParentId(
@@ -46,11 +54,20 @@ class Categories extends React.Component<Props, State> {
                 givenCategoryId,
                 categoriesMock
             ),
+            breadcrumbs,
+            isAtMainCategories:
+                givenCategoryId === globalSettings.mainCategoryId,
         })
     }
 
     onCategoryPick = (categoryId: string): void => {
-        this.updateStateByCategoryId(categoryId)
+        const breadcrumbsWithOptionalNewItemAdded = BreadcrumbsService.getBreadcrumbsWithOptionalNewItemAdded(
+            categoryId,
+            categoriesMock,
+            this.state.breadcrumbs
+        )
+
+        this.updateState(categoryId, breadcrumbsWithOptionalNewItemAdded)
     }
 
     onGoBackClick = (): void => {
@@ -59,7 +76,10 @@ class Categories extends React.Component<Props, State> {
             categoriesMock
         )
 
-        this.updateStateByCategoryId(parentId)
+        const breadcrumbsWithRemovedLastItem = [...this.state.breadcrumbs]
+        breadcrumbsWithRemovedLastItem.pop()
+
+        this.updateState(parentId, breadcrumbsWithRemovedLastItem)
     }
 
     getCategoryBydCurrentCategoryId(): Category {
@@ -82,9 +102,13 @@ class Categories extends React.Component<Props, State> {
     render() {
         return (
             <section className={styles['categories']}>
-                <button onClick={this.onGoBackClick}>
-                    {staticTexts.goBack}
-                </button>
+                {!this.state.isAtMainCategories && (
+                    <button onClick={this.onGoBackClick}>
+                        {staticTexts.goBack}
+                    </button>
+                )}
+
+                <Breadcrumbs breadcrumbs={this.state.breadcrumbs} />
 
                 {!this.state.isLast && (
                     <CategoryList
