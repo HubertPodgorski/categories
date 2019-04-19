@@ -1,0 +1,11 @@
+@import '../../styles/consts/colors';
+
+.categories-wrapper {
+    background: $white-dark;
+    color: $gray-dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100vw;
+}
