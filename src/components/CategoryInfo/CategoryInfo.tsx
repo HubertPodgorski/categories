@@ -14,6 +14,7 @@ const staticTexts = {
     yourCategoryIdIs: 'Your category id is:',
     yourCategoryNameIs: 'Your category name is:',
     yourParentCategoryIdIs: 'Your parent category id is:',
+    changeCategory: 'Change category',
 }
 
 class CategoryInfo extends React.Component<Props, State> {
@@ -29,20 +30,25 @@ class CategoryInfo extends React.Component<Props, State> {
     render() {
         const { category } = this.props
         return (
-            <section>
-                <button onClick={this.onCategoryChangeClick}>Change</button>
-
-                <div>
+            <section className={styles['category-info']}>
+                <div className={styles['category-info__text']}>
                     {staticTexts.yourCategoryIdIs} "{category.id}"
                 </div>
 
-                <div>
+                <div className={styles['category-info__text']}>
                     {staticTexts.yourCategoryNameIs} {category.name}
                 </div>
 
-                <div>
+                <div className={styles['category-info__text']}>
                     {staticTexts.yourParentCategoryIdIs} "{category.parentId}"
                 </div>
+
+                <button
+                    className={styles['category-info__change-button']}
+                    onClick={this.onCategoryChangeClick}
+                >
+                    {staticTexts.changeCategory}
+                </button>
             </section>
         )
     }

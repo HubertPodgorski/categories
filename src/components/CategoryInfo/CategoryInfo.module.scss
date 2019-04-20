@@ -1,0 +1,30 @@
+@import '../../styles/consts/colors';
+@import '../../styles/helpers/mixins';
+
+.category-info {
+    padding: 10px;
+    max-width: 400px;
+    margin: 20px auto 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+
+    &__text {
+        padding: 10px;
+    }
+
+    &__change-button {
+        background: none;
+        align-self: flex-end;
+        border: 1px solid rgba($gray-dark, 0.1);
+        padding: 10px;
+        margin-top: 20px;
+        font-size: 12px;
+        border-radius: 3px;
+        @include text-hover($gray-dark);
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
