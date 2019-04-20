@@ -39,42 +39,42 @@ export const categoriesMock: Category[] = [
     {
         id: '8',
         parentId: '1',
-        name: 'Sub category name 1',
+        name: 'Ragatim',
     },
     {
         id: '9',
         parentId: '1',
-        name: 'Sub category name 2',
+        name: 'Ogobinaf',
     },
     {
         id: '10',
         parentId: '1',
-        name: 'Sub category name 3',
+        name: 'Degasuj',
     },
     {
         id: '11',
         parentId: '2',
-        name: 'Sub category name 4',
+        name: 'Gaoreso',
     },
     {
         id: '12',
         parentId: '2',
-        name: 'Sub category name 5',
+        name: 'Zisotoz',
     },
     {
         id: '13',
         parentId: '6',
-        name: 'Sub category name 6',
+        name: 'Ruaheif',
     },
     {
         id: '14',
         parentId: '6',
-        name: 'Sub category name 7',
+        name: 'Amemowis',
     },
     {
         id: '15',
         parentId: '8',
-        name: 'Very sub category name',
+        name: 'Mohrikvu',
     },
     {
         id: '16',

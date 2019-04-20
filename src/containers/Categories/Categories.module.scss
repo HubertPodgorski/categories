@@ -27,7 +27,7 @@
         margin-left: 10px;
         min-width: 100px;
 
-        @include text-hover($gray-dark);
+        @include text-hover-lighten($gray-dark);
 
         &:focus {
             outline: none;
