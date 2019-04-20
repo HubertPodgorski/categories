@@ -1,0 +1,9 @@
+@mixin text-hover($color) {
+    transition: color 150ms ease-in-out;
+    color: $color;
+    cursor: pointer;
+
+    &:hover {
+        color: lighten($color, 10%);
+    }
+}

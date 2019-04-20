@@ -12,6 +12,7 @@ import BreadcrumbsService, {
 
 const staticTexts = {
     goBack: 'Go back',
+    chooseOneOfMainCategories: 'Choose one of main categories',
 }
 
 interface State {
@@ -102,13 +103,26 @@ class Categories extends React.Component<Props, State> {
     render() {
         return (
             <section className={styles['categories']}>
-                {!this.state.isAtMainCategories && !this.state.isLast && (
-                    <button onClick={this.onGoBackClick}>
-                        {staticTexts.goBack}
-                    </button>
+                {!this.state.isAtMainCategories && (
+                    <div className={styles['categories__header']}>
+                        <Breadcrumbs breadcrumbs={this.state.breadcrumbs} />
+
+                        {!this.state.isLast && (
+                            <button
+                                className={styles['categories__go-back-button']}
+                                onClick={this.onGoBackClick}
+                            >
+                                {staticTexts.goBack}
+                            </button>
+                        )}
+                    </div>
                 )}
 
-                <Breadcrumbs breadcrumbs={this.state.breadcrumbs} />
+                {this.state.isAtMainCategories && (
+                    <div className={styles['categories__header']}>
+                        {staticTexts.chooseOneOfMainCategories}
+                    </div>
+                )}
 
                 {!this.state.isLast && (
                     <CategoryList
