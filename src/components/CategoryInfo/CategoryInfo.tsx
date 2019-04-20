@@ -1,7 +1,14 @@
 import React from 'react'
-import { object, oneOfType } from 'prop-types'
+import { object, func } from 'prop-types'
 import styles from './CategoryInfo.module.scss'
 import { Category } from '../../services/CategoriesService'
+
+interface State {}
+
+interface Props {
+    category: Category;
+    onGoBackClick: Function;
+}
 
 const staticTexts = {
     yourCategoryIdIs: 'Your category id is:',
@@ -9,24 +16,36 @@ const staticTexts = {
     yourParentCategoryIdIs: 'Your parent category id is:',
 }
 
-const CategoryInfo = ({ category }: { category: Category }) => (
-    <section>
-        <div>
-            {staticTexts.yourCategoryIdIs} "{category.id}"
-        </div>
+class CategoryInfo extends React.Component<Props, State> {
+    static propTypes = {
+        category: object.isRequired,
+        onGoBackClick: func.isRequired,
+    }
 
-        <div>
-            {staticTexts.yourCategoryNameIs} {category.name}
-        </div>
+    onCategoryChangeClick = (): void => {
+        this.props.onGoBackClick()
+    }
 
-        <div>
-            {staticTexts.yourParentCategoryIdIs} "{category.parentId}"
-        </div>
-    </section>
-)
+    render() {
+        const { category } = this.props
+        return (
+            <section>
+                <button onClick={this.onCategoryChangeClick}>Change</button>
 
-CategoryInfo.propTypes = {
-    category: object.isRequired,
+                <div>
+                    {staticTexts.yourCategoryIdIs} "{category.id}"
+                </div>
+
+                <div>
+                    {staticTexts.yourCategoryNameIs} {category.name}
+                </div>
+
+                <div>
+                    {staticTexts.yourParentCategoryIdIs} "{category.parentId}"
+                </div>
+            </section>
+        )
+    }
 }
 
 export default CategoryInfo

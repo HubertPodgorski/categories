@@ -102,7 +102,7 @@ class Categories extends React.Component<Props, State> {
     render() {
         return (
             <section className={styles['categories']}>
-                {!this.state.isAtMainCategories && (
+                {!this.state.isAtMainCategories && !this.state.isLast && (
                     <button onClick={this.onGoBackClick}>
                         {staticTexts.goBack}
                     </button>
@@ -120,6 +120,7 @@ class Categories extends React.Component<Props, State> {
                 {this.state.isLast && (
                     <CategoryInfo
                         category={this.getCategoryBydCurrentCategoryId()}
+                        onGoBackClick={this.onGoBackClick}
                     />
                 )}
             </section>
