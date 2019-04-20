@@ -173,7 +173,42 @@ export const categoriesMock: Category[] = [
     },
     {
         id: '35',
-        parentId: '15',
-        name: 'Taucovog',
+        parentId: '1',
+        name: 'Sabhemul',
+    },
+    {
+        id: '36',
+        parentId: '1',
+        name: 'Uwwimpe',
+    },
+    {
+        id: '37',
+        parentId: '1',
+        name: 'Juvitaze',
+    },
+    {
+        id: '38',
+        parentId: '1',
+        name: 'Hopupid',
+    },
+    {
+        id: '39',
+        parentId: '1',
+        name: 'Nekorib',
+    },
+    {
+        id: '40',
+        parentId: '1',
+        name: 'Cuhitsi',
+    },
+    {
+        id: '41',
+        parentId: '1',
+        name: 'Jabuog',
+    },
+    {
+        id: '42',
+        parentId: '1',
+        name: 'Kegherji',
     },
 ]
