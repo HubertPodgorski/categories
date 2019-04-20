@@ -19,7 +19,11 @@ const CategoryList = ({
 }: {
     categoryList: Category[],
     onCategoryPick: Function,
-}) => <ul>{renderList(categoryList, onCategoryPick)}</ul>
+}) => (
+    <ul className={styles['category-list']}>
+        {renderList(categoryList, onCategoryPick)}
+    </ul>
+)
 
 CategoryList.propTypes = {
     categoryList: arrayOf(object).isRequired,

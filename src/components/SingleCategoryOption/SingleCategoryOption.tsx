@@ -22,7 +22,10 @@ class SingleCategoryOption extends React.Component<Props, State> {
 
     render() {
         return (
-            <li onClick={this.onCategoryClickHandler}>
+            <li
+                className={styles['single-category-option']}
+                onClick={this.onCategoryClickHandler}
+            >
                 {this.props.category.name}
             </li>
         )

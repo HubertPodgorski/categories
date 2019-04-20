@@ -1,0 +1,10 @@
+@import '../../styles/consts/colors';
+@import '../../styles/helpers/mixins';
+
+.single-category-option {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 10px;
+
+    @include text-hover($gray-dark);
+}
