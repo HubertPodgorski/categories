@@ -1,9 +1,10 @@
-@mixin text-hover($color) {
-    transition: color 150ms ease-in-out;
+@mixin text-hover-lighten($color) {
+    transition: color 100ms ease-in-out;
     color: $color;
     cursor: pointer;
 
     &:hover {
-        color: lighten($color, 10%);
+        color: lighten($color, 30%);
+        text-decoration: underline;
     }
 }
