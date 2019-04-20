@@ -78,7 +78,102 @@ export const categoriesMock: Category[] = [
     },
     {
         id: '16',
+        parentId: '9',
+        name: 'Oman',
+    },
+    {
+        id: '17',
+        parentId: '3',
+        name: 'Venezuela',
+    },
+    {
+        id: '18',
+        parentId: '4',
+        name: 'Madagascar',
+    },
+    {
+        id: '19',
+        parentId: '2',
+        name: 'Malawi',
+    },
+    {
+        id: '20',
         parentId: '8',
-        name: 'Very sub category name 2',
+        name: 'American Samoa',
+    },
+    {
+        id: '21',
+        parentId: '1',
+        name: 'Uganda',
+    },
+    {
+        id: '22',
+        parentId: '3',
+        name: 'Falkland Islands',
+    },
+    {
+        id: '23',
+        parentId: '4',
+        name: 'St. Pierre & Miquelon',
+    },
+    {
+        id: '24',
+        parentId: '5',
+        name: 'Macau SAR China',
+    },
+    {
+        id: '25',
+        parentId: '6',
+        name: 'Cayman Islands',
+    },
+    {
+        id: '26',
+        parentId: '7',
+        name: 'Wallis & Futuna',
+    },
+    {
+        id: '27',
+        parentId: '8',
+        name: 'Zimiwce',
+    },
+    {
+        id: '28',
+        parentId: '9',
+        name: 'Dikhibat',
+    },
+    {
+        id: '29',
+        parentId: '10',
+        name: 'Sepuvsa',
+    },
+    {
+        id: '30',
+        parentId: '10',
+        name: 'Ubkiwej',
+    },
+    {
+        id: '31',
+        parentId: '11',
+        name: 'Limgiwok',
+    },
+    {
+        id: '32',
+        parentId: '12',
+        name: 'Ulohide',
+    },
+    {
+        id: '33',
+        parentId: '13',
+        name: 'Cowinsa',
+    },
+    {
+        id: '34',
+        parentId: '14',
+        name: 'Meisaum',
+    },
+    {
+        id: '35',
+        parentId: '15',
+        name: 'Taucovog',
     },
 ]
