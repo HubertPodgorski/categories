@@ -4,4 +4,8 @@
     justify-content: flex-start;
     align-items: flex-start;
     list-style: none;
+
+    @media screen and (max-width: 480px) {
+        justify-content: center;
+    }
 }
