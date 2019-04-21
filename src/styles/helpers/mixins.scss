@@ -8,3 +8,16 @@
         text-decoration: underline;
     }
 }
+
+@mixin button-only-border($color) {
+    background: none;
+    border: 1px solid rgba($color, 0.1);
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 3px;
+    @include text-hover-lighten($gray-dark);
+
+    &:focus {
+        outline: none;
+    }
+}
