@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './Categories.module.scss'
 import CategoryList from '../../components/CategoryList/CategoryList'
-import { categoriesMock } from '../../consts/mocks'
 import CategoriesService, { Category } from '../../services/CategoriesService'
 import CategoryInfo from '../../components/CategoryInfo/CategoryInfo'
 import { globalSettings } from '../../consts/settings'
@@ -23,21 +22,25 @@ interface State {
     isAtMainCategories: boolean;
 }
 
-interface Props {}
+interface Props {
+    categoryList: Category[];
+}
 
 class Categories extends React.Component<Props, State> {
-    constructor(props: {}) {
+    constructor(props: Props) {
         super(props)
+
+        const { categoryList } = props
 
         this.state = {
             currentCategoryId: globalSettings.mainCategoryId,
             categoryList: CategoriesService.getCategoryListByParentId(
                 globalSettings.mainCategoryId,
-                categoriesMock
+                categoryList
             ),
             isLast: CategoriesService.isCategoryLastById(
                 globalSettings.mainCategoryId,
-                categoriesMock
+                categoryList
             ),
             breadcrumbs: [],
             isAtMainCategories: true,
@@ -45,15 +48,17 @@ class Categories extends React.Component<Props, State> {
     }
 
     updateState(givenCategoryId: string, breadcrumbs: Breadcrumb[]): void {
+        const { categoryList } = this.props
+
         this.setState({
             currentCategoryId: givenCategoryId,
             categoryList: CategoriesService.getCategoryListByParentId(
                 givenCategoryId,
-                categoriesMock
+                categoryList
             ),
             isLast: CategoriesService.isCategoryLastById(
                 givenCategoryId,
-                categoriesMock
+                categoryList
             ),
             breadcrumbs,
             isAtMainCategories:
@@ -64,7 +69,7 @@ class Categories extends React.Component<Props, State> {
     onCategoryPick = (categoryId: string): void => {
         const breadcrumbsWithOptionalNewItemAdded = BreadcrumbsService.getBreadcrumbsWithOptionalNewItemAdded(
             categoryId,
-            categoriesMock,
+            this.props.categoryList,
             this.state.breadcrumbs
         )
 
@@ -74,7 +79,7 @@ class Categories extends React.Component<Props, State> {
     onGoBackClick = (): void => {
         const parentId = CategoriesService.getParentIdByCategoryId(
             this.state.currentCategoryId,
-            categoriesMock
+            this.props.categoryList
         )
 
         const breadcrumbsWithRemovedLastItem = [...this.state.breadcrumbs]
@@ -83,12 +88,12 @@ class Categories extends React.Component<Props, State> {
         this.updateState(parentId, breadcrumbsWithRemovedLastItem)
     }
 
-    getCategoryBydCurrentCategoryId(): Category {
+    getCategoryByCurrentCategoryId(): Category {
         const defaultTextValue = '---'
 
         const category = CategoriesService.getCategoryById(
             this.state.currentCategoryId,
-            categoriesMock
+            this.props.categoryList
         )
 
         return category
@@ -133,7 +138,7 @@ class Categories extends React.Component<Props, State> {
 
                 {this.state.isLast && (
                     <CategoryInfo
-                        category={this.getCategoryBydCurrentCategoryId()}
+                        category={this.getCategoryByCurrentCategoryId()}
                         onGoBackClick={this.onGoBackClick}
                     />
                 )}

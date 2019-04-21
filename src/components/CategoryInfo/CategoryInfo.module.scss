@@ -14,17 +14,9 @@
     }
 
     &__change-button {
-        background: none;
         align-self: flex-end;
-        border: 1px solid rgba($gray-dark, 0.1);
-        padding: 10px;
         margin-top: 20px;
-        font-size: 12px;
-        border-radius: 3px;
-        @include text-hover-lighten($gray-dark);
 
-        &:focus {
-            outline: none;
-        }
+        @include button-only-border($gray-dark)
     }
 }
